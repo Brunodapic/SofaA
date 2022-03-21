@@ -8,8 +8,9 @@ html {
     background: linear-gradient(#84e1e7, #012047);
   }
   
-  .login-box {
+  .container {
     position: absolute;
+    box-sizing: border-box;
     top: 50%;
     left: 50%;
     width: 35rem;
@@ -20,18 +21,18 @@ html {
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
   }
   
-  .login-box h1 {
+  .container h1 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
     text-align: center;
   }
   
-  .login-box .user-box {
+  .container .input-wrap {
     position: relative;
   }
   
-  .login-box .user-box input {
+  .container .input-wrap input {
     width: 100%;
     padding: 10px 0;
     font-size: 2rem;
@@ -42,7 +43,7 @@ html {
     outline: none;
     background: transparent;
   }
-  .login-box .user-box label {
+  .container .input-wrap label {
     position: absolute;
     top:0;
     left: 0;
@@ -53,15 +54,15 @@ html {
     transition: .5s;
   }
   
-  .login-box .user-box input:focus ~ label,
-  .login-box .user-box input:valid ~ label {
+  .container .input-wrap input:focus ~ label,
+  .container .input-wrap input:valid ~ label {
     top: -20px;
     left: 0;
     color: #012047;
     font-size: 1rem;
   }
 
-  .button {
+  .submit {
     min-width: 300px;
     min-height: 60px;
     font-size: 22px;
@@ -81,7 +82,7 @@ html {
     }
   
   
-  .button:hover, .button:focus {
+  .submit:hover, .submit:focus {
     color: #012047;
     transform: translateY(-1rem);
   }
