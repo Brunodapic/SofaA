@@ -1,5 +1,5 @@
-//import Pokedex from '/node_modules/pokedex-promise-v2';
-//const P = new Pokedex();
+import Pokedex from '/node_modules/pokedex-promise-v2';
+const P = new Pokedex();
 
 console.log("yes")
 
