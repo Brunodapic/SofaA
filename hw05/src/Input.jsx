@@ -1,4 +1,39 @@
 import React from "react";
+import { useState } from "react";
+
+function Form(props) {
+
+    const { handleSubmit } = props
+    const [x, setX] = useState(1);
+    const [y, setY] = useState(0);
+    const [r, setR] = useState(0);
+    const [color, setColor] = useState('#000000');
+
+
+
+    /*const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(x , y, r, color)
+      }*/
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>Enter X variable:
+                <input value={x} name="x" onChange={(e) => setX(e.target.value)} type="number" />
+            </label>
+            <label>Enter Y variable:
+                <input value={y} name="y" onChange={(e) => setY(e.target.value)} type="number" />
+            </label>
+            <label>Enter radius:
+                <input value={r} name="r" onChange={(e) => setR(e.target.value)} type="number" />
+            </label>
+            <label>Pick a color:
+                <input value={color} name="color" onChange={(e) => setColor(e.target.value)} type="color" />
+            </label>
+            <input type="submit" />
+        </form>
+    )
+}
 
 export default function Input() {
 
@@ -10,11 +45,55 @@ export default function Input() {
     // 1st: a button which will add another form on click, meaning a user can add more than one circle
     // 2nd: forms with submit buttons
     // 3rd: svg which will consist of circle elements whose data a user has submitted
+
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
+    const [r, setR] = useState(0);
+    const [color, setColor] = useState('#000000');
+    const [formShow, setFormShow] = useState(true)
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(x, y, r, color)
+        setFormShow(!formShow)
+        addCircle()
+        setX(0)
+        setY(0)
+        setR(0)
+        setColor('#000000')
+    }
+
+    const addCircle = () => {
+        const svg = document.getElementById("svg")
+        //nisam bio siguran kako da implementiram neku vrstu memorije,
+        //ovo je možda "gluplji" način ,ali je jako jednostavan
+        svg.innerHTML += `<circle cx=${x} cy=${y} r=${r} fill=${color} />`
+    }
     return (
         <div>
-            <button>Add another circle</button>
-            {/* your forms go here */}
-            <svg viewBox="0 0 600 600" style={{maxWidth: 'min(600px, 80vw)', maxHeight: 'min(600px, 80vh)'}}>
+            <button onClick={() => { setFormShow(!formShow) }}>Add another circle</button>
+            {/*<Form handleSubmit={handleSubmit}/>*/}
+            {formShow ?
+                //moguce je isto napraviti pomocu hidden={formShow}, ali htio sam pokazati vise znanja pogotovo sa proslog predavanja
+                <form onSubmit={handleSubmit}>
+                    <label>Enter X variable:
+                        <input value={x} name="x" onChange={(e) => setX(e.target.value)} type="number" />
+                    </label>
+                    <label>Enter Y variable:
+                        <input value={y} name="y" onChange={(e) => setY(e.target.value)} type="number" />
+                    </label>
+                    <label>Enter radius:
+                        <input value={r} name="r" onChange={(e) => setR(e.target.value)} type="number" />
+                    </label>
+                    <label>Pick a color:
+                        <input value={color} name="color" onChange={(e) => setColor(e.target.value)} type="color" />
+                    </label>
+                    <input type="submit" />
+                </form>
+                :
+                <></>
+            }
+            <svg id="svg" viewBox="0 0 600 600" style={{ maxWidth: 'min(600px, 80vw)', maxHeight: 'min(600px, 80vh)' }}>
                 {/* circle elements with x, y coordinate center, r radius and color color */}
                 {/* if you want to be fancy, play with fills, outlines, whatever you find fitting */}
             </svg>
