@@ -1,40 +1,6 @@
 import React from "react";
 import { useState } from "react";
 
-function Form(props) {
-
-    const { handleSubmit } = props
-    const [x, setX] = useState(1);
-    const [y, setY] = useState(0);
-    const [r, setR] = useState(0);
-    const [color, setColor] = useState('#000000');
-
-
-
-    /*const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(x , y, r, color)
-      }*/
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>Enter X variable:
-                <input value={x} name="x" onChange={(e) => setX(e.target.value)} type="number" />
-            </label>
-            <label>Enter Y variable:
-                <input value={y} name="y" onChange={(e) => setY(e.target.value)} type="number" />
-            </label>
-            <label>Enter radius:
-                <input value={r} name="r" onChange={(e) => setR(e.target.value)} type="number" />
-            </label>
-            <label>Pick a color:
-                <input value={color} name="color" onChange={(e) => setColor(e.target.value)} type="color" />
-            </label>
-            <input type="submit" />
-        </form>
-    )
-}
-
 export default function Input() {
 
     // your task here is to create an input form in which a user will input at least 4 fields: x, y, r and color
@@ -45,7 +11,7 @@ export default function Input() {
     // 1st: a button which will add another form on click, meaning a user can add more than one circle
     // 2nd: forms with submit buttons
     // 3rd: svg which will consist of circle elements whose data a user has submitted
-
+    
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [r, setR] = useState(0);
@@ -72,7 +38,6 @@ export default function Input() {
     return (
         <div>
             <button onClick={() => { setFormShow(!formShow) }}>Add another circle</button>
-            {/*<Form handleSubmit={handleSubmit}/>*/}
             {formShow ?
                 //moguce je isto napraviti pomocu hidden={formShow}, ali htio sam pokazati vise znanja pogotovo sa proslog predavanja
                 <form onSubmit={handleSubmit}>
