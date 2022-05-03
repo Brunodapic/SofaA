@@ -13,7 +13,7 @@ export const styledToggleButton = styled(ToggleButton)<{simple?: boolean}>`
     background: #F90;
     border-top: solid 1px #000;
     flex-basis: 50%;
-    width: ${props => props.simple? `16rem`:`30rem` };
+    width: ${props => props.simple? `16rem`:`32rem` };
     padding:5px;
 `
 
@@ -23,6 +23,10 @@ export const fitySyled = styled(Button)<{working?: boolean}>`
     border-top: solid 1px #000;
     width: 5rem;
     padding:5px;
+    font-weight: 300;
+    color: #000;
+    font: bold;
+
 `
 
 export const styledInfo = styled.div`
@@ -38,7 +42,7 @@ export const styledInfo = styled.div`
 
 export const styledH2Quiz = styled.h2`
     padding: 1rem;
-    width: 100%;
+    width: auto;
     text-align:center;
     border-top: 1px solid black;
 `

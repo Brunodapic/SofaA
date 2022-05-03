@@ -1,12 +1,14 @@
 import styled from "styled-components";
+import { Box, Button, TextField } from '@mui/material';
 
-export const navigationBar = styled.div`
+
+export const styledSubmitName = styled(Button)`
+    color: #fff;
     display: flex;
     justify-content: center;
     border: 2px solid white;
-    padding: 30px;
+    padding: 15px;
     background-color: #0a30a6;
-    
     button {
         background-color: #0a6bff;
         border-radius: 4px;
@@ -17,13 +19,13 @@ export const navigationBar = styled.div`
         cursor: pointer;
         display: inherit;
         font-family: "Space Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-        font-size: 12px;
-        font-weight: 400;
+        font-size: 8px;
+        font-weight: 300;
         line-height: 18px;
         margin: 0;
-        min-height: 28px;
-        min-width: 120px;
-        padding: 10px 10px;
+        height: 3rem;
+        min-width: 100x;
+        
         position: relative;
         text-align: center;
         user-select: none;
@@ -37,14 +39,29 @@ export const navigationBar = styled.div`
         transform: translateY(-2px);
     }
 `
+export const styledTextField = styled(TextField)`
+    width: '90%';
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-Left: 'auto';
+    margin-Right: 'auto';            
+    padding-Bottom: 0;
+    margin-Top: 0;
+    font-Weight: 500;
+    input: {
+    color: 'white'
+    }   
+`
 
-export const usernameDisplayDiv = styled.div` 
-    margin-left: auto;
+export const styledBox = styled(Box)`
     display: flex;
+    width: '90%';
+    margin-Left: 'auto';
+    margin-Right: 'auto';            
+    padding-Bottom: 0;
+    margin-Top: 0;   
     justify-content: center;
-    border: 1px solid;
-    padding: 1rem;
-    right: 2rem;
-    color: white;
-    cursor: pointer;
+    align-items: baseline;
+
+
 `

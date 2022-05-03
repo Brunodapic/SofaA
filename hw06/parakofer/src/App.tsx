@@ -16,7 +16,7 @@ import Quiz from './components/Quiz/Quiz'
 import Username from './components/Username/Username'
 import * as S from './components/mainStyles'
 
-import { SetingsContext, UserNameContex } from './context/SetingsContext';
+import { SetingsContext, UserNameContex,JokersContex } from './context/SetingsContext';
 
 
 
@@ -28,6 +28,7 @@ const swrConfig: SWRConfiguration = { fetcher }
 function App() {
   const [numberOfQ, setNumberOfQ] = useState<number>(0);
   const [userName, setUserName] = useState<string>('undifined')
+  const [halfhalf,sethalfhalf]=useState<boolean>(false)
   const updateName = (num: number): void => {
     setNumberOfQ(num)
   }
@@ -37,6 +38,7 @@ function App() {
     <SWRConfig value={swrConfig}>
       <SetingsContext.Provider value={{ numberOfQ, setNumberOfQ }}>
         <UserNameContex.Provider value={{ userName, setUserName }}>
+        <JokersContex.Provider value={{ halfhalf, sethalfhalf }}>
 
           <Router>
             <S.bodyDiv>
@@ -53,6 +55,8 @@ function App() {
               </S.mainStyleDiv>
             </S.bodyDiv>
           </Router>
+
+          </JokersContex.Provider>
         </UserNameContex.Provider>
       </SetingsContext.Provider>
 

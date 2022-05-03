@@ -14,7 +14,7 @@ export default function NavBar() {
 
             <Button onClick={() => navigate('/')} >Start Quiz</Button>
             <Button onClick={() => navigate('/highscore')} >Highscore</Button>
-            <S.usernameDisplayDiv>
+            <S.usernameDisplayDiv onClick={() => navigate('/username')}>
                 <h3>{userName}</h3>
             </S.usernameDisplayDiv>
 

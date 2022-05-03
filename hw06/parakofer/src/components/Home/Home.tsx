@@ -190,8 +190,10 @@ export default function Home() {
             </S.formSyled>
             <S.submitButtonDiv>
                 <Button onClick={() => {
-                    console.log(numberOfQForm, category, difficulty);
-                    navigate(`/quiz?amount=${numberOfQForm}&category=${category}&difficulty=${difficulty}&TOKEN=${token}`)
+                    console.log(numberOfQForm, category, difficulty,token);
+                    console.log(token);
+
+                    navigate(`/quiz?amount=${numberOfQForm}&category=${category}&difficulty=${difficulty}&TOKEN=${token.token}`)
                 }
                 }>Start Quiz </Button>
             </S.submitButtonDiv>

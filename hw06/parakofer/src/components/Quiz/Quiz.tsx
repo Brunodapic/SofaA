@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWRImmutable from 'swr/immutable'
 import useSWR, { mutate } from 'swr'
-import { useNumberOfQ } from "../../context/SetingsContext";
+import { useNumberOfQ, useUserName, useHalfHalf } from "../../context/SetingsContext";
 import data from '../../data/data.json';
-import { useUserName } from "../../context/SetingsContext";
 import * as S from './styles'
 
 
@@ -22,6 +21,7 @@ export default function Quiz() {
     const [gameWon, setGameWon] = useState(false)
     const { userName, setUserName } = useUserName()
     const { numberOfQ, setNumberOfQ } = useNumberOfQ()
+    const { halfhalf, sethalfhalf } = useHalfHalf()
     const url = `https://opentdb.com/api.php?amount=1&category=${category}&difficulty=${difficulty}&${token}`
     const { data: question, error, mutate } = useSWR<any>(`${url}`, {
         revalidateIfStale: false,
@@ -60,6 +60,7 @@ export default function Quiz() {
     }
 
     function correctAns() {
+        sethalfhalf(false)
         if (numberOfQ == 1) {
             console.log("end")
             putUserOnBoard()
@@ -74,12 +75,15 @@ export default function Quiz() {
     }
 
     function wrongAns() {
-
+        putUserOnBoard()
+        sethalfhalf(false)
         return (
             <div>
                 <h1>Game Over</h1>
                 <h2>Number of correct answers : {numberOfQ ? Number(urlParams.get('amount')) - numberOfQ : 0}</h2>
                 <Button onClick={() => navigate('/')} >Try again</Button>
+                <Button onClick={() => navigate('/highscore')} >See scoreboard</Button>
+
             </div>
         )
     }
@@ -119,28 +123,45 @@ export default function Quiz() {
     }
 
     function printCategoris() {
-        console.log(fity && question.type === "boolean")
-        console.log(question.type === "boolean")
-        console.log(fity)
-
         return (
             <div>
                 <S.styledInfo>
                     <h4>{question.results[0].category}</h4>
                     <h4>{question.results[0].difficulty}</h4>
                     <h4>Number of correct answers : {numberOfQ ? Number(urlParams.get('amount')) - numberOfQ : 0}</h4>
-                    <S.fitySyled onClick={()=>handle5050()} disabled={!fity && question.type === "boolean"} working={fity && !(question.type === "boolean")}>50:50</S.fitySyled>
+                    <S.fitySyled onClick={() => handle5050()} disabled={!fity || (question.results[0].type === "boolean")} working={fity && !(question.results[0].type === "boolean")}>50:50</S.fitySyled>
                 </S.styledInfo>
                 <S.styledH2Quiz>{question.results[0].question}</S.styledH2Quiz>
-                <div>{printPitanja()}</div>
+                {halfhalf ?
+                    <div>{print5050()}</div>
+                    :
+                    <div>{printPitanja()}</div>
+                }
+
             </div>
 
         )
-        
+
     }
     function handle5050() {
         setFity(false)
+        sethalfhalf(true)
     }
+
+    function print5050() {
+        return (
+            <S.styledToggleButtonGroup
+                color="primary"
+                exclusive
+                onChange={handleChange}
+            >
+                <S.styledToggleButton simple={false} name="category" key={question.results[0].incorrect_answers[0]} value={question.results[0].incorrect_answers[0]} >{question.results[0].incorrect_answers[0]}</S.styledToggleButton>
+                <S.styledToggleButton simple={false} name="category" key={question.results[0].correct_answer} value={question.results[0].correct_answer} >{question.results[0].correct_answer}</S.styledToggleButton>
+            </S.styledToggleButtonGroup>
+
+        )
+    }
+
     function randomArrayShuffle(array: any[]) {
         var currentIndex = array.length, temporaryValue, randomIndex;
         while (0 !== currentIndex) {
