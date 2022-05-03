@@ -58,13 +58,13 @@ export default function Home() {
     const [difficulty, setDifficulty] = useState('easy');
     const [category, setCategory] = useState(23);
     const [numberOfQForm, setNumberOfQFrom] = useState(15)
-    
-    const {numberOfQ, setNumberOfQ} =useNumberOfQ()
+
+    const { numberOfQ, setNumberOfQ } = useNumberOfQ()
 
     const url = 'https://opentdb.com/api_category.php'
-    const { data: categoris, error:caterror } = useSWRImmutable<any>(`${url}`)
-    const tokenUrl='https://opentdb.com/api_token.php?command=request'
-    const { data: token, error:tokenError } = useSWRImmutable<any>(`${tokenUrl}`)
+    const { data: categoris, error: caterror } = useSWRImmutable<any>(`${url}`)
+    const tokenUrl = 'https://opentdb.com/api_token.php?command=request'
+    const { data: token, error: tokenError } = useSWRImmutable<any>(`${tokenUrl}`)
 
 
     if (!categoris) {
@@ -95,7 +95,7 @@ export default function Home() {
             >
                 {categoris.trivia_categories.map((e: any) => {
                     return (
-                        <ToggleButton name="category" value={e.id} >{e.name}</ToggleButton>
+                        <S.categoryButtonStyled name="category" value={e.id} >{e.name}</S.categoryButtonStyled>
                     )
                 })}
             </ToggleButtonGroup>
@@ -127,9 +127,8 @@ export default function Home() {
     }
 
     return (
-        <S.MatchContainer >
-            <div>
-
+        <>
+            <S.formSyled>
                 {/*<form
                     onSubmit={(e: React.SyntheticEvent) => {
                         e.preventDefault();
@@ -147,20 +146,20 @@ export default function Home() {
                         console.log(numberOfQ,category,difficulty)
                     }}
                 >*/}
-                <div>
-                    <label>Choose the number of Questions</label>
-                    <Slider 
+                <S.inputDivStyled>
+                    <S.inputLabelStyled>Choose the number of Questions:</S.inputLabelStyled>
+                    <Slider
                         name='numberOfQ'
                         defaultValue={15}
                         getAriaValueText={valuetext}
                         max={50}
-                        step={1} 
-                        valueLabelDisplay="on" 
+                        step={1}
+                        valueLabelDisplay="on"
                         marks={marks}
-                        />
-                </div>
-                <div>
-                    <label>Choose the difficulty</label>
+                    />
+                </S.inputDivStyled>
+                <S.inputDivStyled>
+                    <S.inputLabelStyled>Choose the difficulty:</S.inputLabelStyled>
 
                     <ToggleButtonGroup
                         color="primary"
@@ -178,23 +177,26 @@ export default function Home() {
                         <ToggleButton value="medium">Medium</ToggleButton>
                         <ToggleButton value="hard">Hard</ToggleButton>
                     </ToggleButtonGroup>
-                </div>
-                <div>
-                    <label>Choose the category</label>
+                </S.inputDivStyled>
+                <S.inputDivStyled>
+                    <S.inputLabelStyled>Choose the category:</S.inputLabelStyled>
 
                     {categoris ?
                         printCategoris()
                         :
                         <div>Loading...</div>
                     }
-                </div>
-                <div>
-                    <Button onClick={() => {console.log(numberOfQForm, category, difficulty);
-                                           navigate(`/quiz?amount=${numberOfQForm}&category=${category}&difficulty=${difficulty}&TOKEN=${token}`)  }           
-                                                        }>Start Quiz </Button>
-                </div>
-                {/*</form>*/}
-            </div>
-        </S.MatchContainer>
+                </S.inputDivStyled>
+            </S.formSyled>
+            <S.submitButtonDiv>
+                <Button onClick={() => {
+                    console.log(numberOfQForm, category, difficulty);
+                    navigate(`/quiz?amount=${numberOfQForm}&category=${category}&difficulty=${difficulty}&TOKEN=${token}`)
+                }
+                }>Start Quiz </Button>
+            </S.submitButtonDiv>
+            {/*</form>*/}
+        </>
+
     )
 }

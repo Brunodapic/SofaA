@@ -13,7 +13,10 @@ import NavBar from './components/NavBar/NavBar'
 import Home from './components/Home/Home'
 import Highscore from './components/Highscore/Highscore'
 import Quiz from './components/Quiz/Quiz'
-import { SetingsContext } from './context/SetingsContext';
+import Username from './components/Username/Username'
+import * as S from './components/mainStyles'
+
+import { SetingsContext, UserNameContex } from './context/SetingsContext';
 
 
 
@@ -24,29 +27,33 @@ const swrConfig: SWRConfiguration = { fetcher }
 
 function App() {
   const [numberOfQ, setNumberOfQ] = useState<number>(0);
+  const [userName, setUserName] = useState<string>('undifined')
   const updateName = (num: number): void => {
     setNumberOfQ(num)
   }
 
 
-
   return (
     <SWRConfig value={swrConfig}>
-      <SetingsContext.Provider value={{ numberOfQ,setNumberOfQ }}>
+      <SetingsContext.Provider value={{ numberOfQ, setNumberOfQ }}>
+        <UserNameContex.Provider value={{ userName, setUserName }}>
 
-        <Router>
-          <div className="App">
-            <NavBar />
+          <Router>
+            <S.bodyDiv>
+              <S.mainStyleDiv>
+                <NavBar />
+                <Routes>
+                  <Route path='/' element={userName == 'undifined' ? <Username /> : <Home />} />
+                  <Route path='/quiz' element={userName == 'undifined' ? <Username /> : <Quiz />} />
+                  <Route path='/highscore' element={<Highscore />} />
+                  <Route path='/username' element={<Username />} />
 
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/quiz' element={<Quiz />} />
-              <Route path='/highscore' element={<Highscore />} />
-            </Routes>
+                </Routes>
 
-
-          </div>
-        </Router>
+              </S.mainStyleDiv>
+            </S.bodyDiv>
+          </Router>
+        </UserNameContex.Provider>
       </SetingsContext.Provider>
 
     </SWRConfig>
