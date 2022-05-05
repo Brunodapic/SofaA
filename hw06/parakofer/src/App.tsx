@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { SWRConfig, SWRConfiguration } from 'swr';
 
 import {
   BrowserRouter as Router,
-  Navigate,
-  Outlet,
   Routes,
   Route
 } from "react-router-dom";
@@ -29,9 +27,7 @@ function App() {
   const [numberOfQ, setNumberOfQ] = useState<number>(0);
   const [userName, setUserName] = useState<string>('undifined')
   const [halfhalf,sethalfhalf]=useState<boolean>(false)
-  const updateName = (num: number): void => {
-    setNumberOfQ(num)
-  }
+
 
 
   return (
@@ -45,8 +41,8 @@ function App() {
               <S.mainStyleDiv>
                 <NavBar />
                 <Routes>
-                  <Route path='/' element={userName == 'undifined' ? <Username /> : <Home />} />
-                  <Route path='/quiz' element={userName == 'undifined' ? <Username /> : <Quiz />} />
+                  <Route path='/' element={userName === 'undifined' ? <Username /> : <Home />} />
+                  <Route path='/quiz' element={userName === 'undifined' ? <Username /> : <Quiz />} />
                   <Route path='/highscore' element={<Highscore />} />
                   <Route path='/username' element={<Username />} />
 

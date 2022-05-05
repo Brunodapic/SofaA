@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as S from './styles'
-import useSWR from "swr";
 import useSWRImmutable from 'swr/immutable'
 import { useNavigate } from 'react-router-dom';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Button, TextField, Box, CssBaseline, Container, Typography, Slider, FormHelperText } from '@mui/material';
+import { Button, Slider } from '@mui/material';
 import { useNumberOfQ } from "../../context/SetingsContext";
 
 const marks = [
@@ -59,7 +58,7 @@ export default function Home() {
     const [category, setCategory] = useState(23);
     const [numberOfQForm, setNumberOfQFrom] = useState(15)
 
-    const { numberOfQ, setNumberOfQ } = useNumberOfQ()
+    const { setNumberOfQ } = useNumberOfQ()
 
     const url = 'https://opentdb.com/api_category.php'
     const { data: categoris, error: caterror } = useSWRImmutable<any>(`${url}`)
@@ -70,16 +69,13 @@ export default function Home() {
     if (!categoris) {
         return (<div>Loading...</div>)
     }
-    if (!categoris) { // if (error)
+    if (!categoris || caterror||tokenError) { // if (error)
         return (<div>An error has occurred...</div>)
     }
-    if (categoris) {
-
-        categoris.trivia_categories.map((e: any) =>
-            console.log(e))
-    }
+    
 
     function printCategoris() {
+        let key=0
         return (
             <ToggleButtonGroup
                 color="primary"
@@ -95,7 +91,7 @@ export default function Home() {
             >
                 {categoris.trivia_categories.map((e: any) => {
                     return (
-                        <S.categoryButtonStyled name="category" value={e.id} >{e.name}</S.categoryButtonStyled>
+                        <S.categoryButtonStyled name="category" key={(key++).toString()} value={e.id} >{e.name}</S.categoryButtonStyled>
                     )
                 })}
             </ToggleButtonGroup>
@@ -152,6 +148,7 @@ export default function Home() {
                         name='numberOfQ'
                         defaultValue={15}
                         getAriaValueText={valuetext}
+                        min={1}
                         max={50}
                         step={1}
                         valueLabelDisplay="on"
@@ -190,9 +187,6 @@ export default function Home() {
             </S.formSyled>
             <S.submitButtonDiv>
                 <Button onClick={() => {
-                    console.log(numberOfQForm, category, difficulty,token);
-                    console.log(token);
-
                     navigate(`/quiz?amount=${numberOfQForm}&category=${category}&difficulty=${difficulty}&TOKEN=${token.token}`)
                 }
                 }>Start Quiz </Button>

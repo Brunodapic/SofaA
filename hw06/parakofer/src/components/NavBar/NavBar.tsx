@@ -7,7 +7,7 @@ import * as S from './styles'
 
 export default function NavBar() {
     const navigate = useNavigate();
-    const { userName, setUserName } = useUserName()
+    const { userName } = useUserName()
 
     return (
         <S.navigationBar>

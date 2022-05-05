@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 export const styledH1board = styled.h1`
     padding: 1rem;
