@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import React from 'react'
 import { FullPlayer } from '../../../model/Player'
 import PlayerDetails from '../../../modules/Player/PlayerDetails'
-import fetcher from '../../../util/fetch'
+import {fetcher} from '../../../util/fetch'
 
 interface PlayerPageProps {
   player: FullPlayer
@@ -26,9 +26,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //@ts-ignore
     const { slug, id } = params;
     const details = await fetcher(`https://api.sofascore.com/api/v1/player/${id}`)
-
+    console.log("details::",details)
+    console.log(".player::",details.player)
     const props: PlayerPageProps = {player: details.player}
-
+    console.log(props)
     return {
       props: props,
     };

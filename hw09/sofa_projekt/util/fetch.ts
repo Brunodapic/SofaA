@@ -1,4 +1,5 @@
 //@ts-ignore
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+export const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default fetcher
+export const api= 'https://academy.dev.sofascore.com/api/v1'
+
