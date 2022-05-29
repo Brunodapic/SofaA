@@ -9,10 +9,10 @@ export default function NavBar() {
 
     return (
         <S.navigationBar>
-            SofaScore
+            SofaScore    
 
             {sports.map(sport =>{
-                return <Link key={sport} href={`/sport/${sport}`} >{sport}</Link>
+                return <Link key={sport} href={`/sport/${sport}`}>{sport}</Link>
             })}
             <S.usernameDisplayDiv >
                 <h3>User</h3>

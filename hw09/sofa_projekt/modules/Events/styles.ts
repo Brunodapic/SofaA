@@ -1,0 +1,40 @@
+import styled from 'styled-components'
+import Image from 'next/image'
+
+export const EventsMainDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: space-evenly;
+`
+
+export const EventCard = styled.div`
+  width: 400px;
+  height: 500px;
+  border: 1px black solid;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+
+`
+
+export const EventCardElement = styled.div`
+  flex: 0 0 50%;
+  padding: 10px;
+  text-align: center;
+`
+
+export const EventName = styled.h2`
+  flex: 0 0 100%;
+  padding: 10px;
+  text-align: center;
+`
+
+export const TeamImage = styled(Image)`
+  border-radius: 10px;
+  flex: 0 0 50%;
+  padding: 10px;
+  text-align: center;
+`

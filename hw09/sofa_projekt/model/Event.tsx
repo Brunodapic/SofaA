@@ -5,6 +5,8 @@ export interface Score {
 }
 
 export interface BasicEvent {
+  [x: string]: any
+  tournament: any
   id: number
   customId: string
   homeTeam: BasicTeam
@@ -12,3 +14,4 @@ export interface BasicEvent {
   homeScore: Score
   awayScore: Score
 }
+
