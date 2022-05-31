@@ -1,0 +1,1 @@
+EventPage standard za pisanje logike , pomoću funkcija ili kako sam ja

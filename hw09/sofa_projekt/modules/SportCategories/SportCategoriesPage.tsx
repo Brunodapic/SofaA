@@ -3,15 +3,18 @@ import { Button } from '../../components/Button'
 import { SportCategories } from '../../model/Categories'
 import Category from './CategoryDetails'
 import * as S from './styles'
-import CategoryLink from '../Link/CategoryLink'
-import useSWR from 'swr'
-import { api, fetcher } from '../../util/fetch'
+import Image from 'next/image'
 import GeuniqueTournamentIDname from './idDetails'
+import { api } from '../../util/fetch'
+import { TeamImage } from '../Events/styles'
 
 export default function SportCategoriesPage({categories}:{categories:Array<SportCategories>}) {
 
   const router = useRouter()
 
+  const myLoader = (id: any) => {
+    return `${api}/unique-tournament/${id.src}/image`
+}
   
   
   return (
@@ -27,10 +30,22 @@ export default function SportCategoriesPage({categories}:{categories:Array<Sport
           <h1>{element.totalEvents}</h1>
           <h1>{element.totalVideos}</h1>
           <h1>{element.totalEventPlayerStatistics}</h1>
-          {element.uniqueTournamentIds?.map( ID =>{
+          {element.uniqueTournamentIds?.map(  ID =>{
             
             
-            return <GeuniqueTournamentIDname uniqueTournamentID={ID}/>
+            return (
+              <TeamImage
+              style={{cursor: 'pointer'}}
+              onClick={() => router.push(`/unique-tournament/${ID}/`)}
+              loader={myLoader}
+              id={ID.toString()}
+              alt="Picture of the author"
+              src={ID.toString()}
+              width={80}
+              height={80}
+          />
+
+            )//<GeuniqueTournamentIDname uniqueTournamentID={ID}/>
             
             })}
         </S.SportsCategoryCard>)

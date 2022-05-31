@@ -1,9 +1,5 @@
-import Link from 'next/link'
 import React from 'react'
-import styled from 'styled-components'
 import useSWR from 'swr'
-import { BasicEvent } from '../../model/Event'
-import TeamLink from '../Link/TeamLink'
 import { UniqueTournament } from '../../model/Tournament'
 import { api } from '../../util/fetch'
 

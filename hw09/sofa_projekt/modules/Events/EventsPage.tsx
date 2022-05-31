@@ -19,7 +19,7 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
         return (t.toLocaleDateString('en-GB'));
     }
 
-    
+
 
 
     const router = useRouter()
@@ -41,27 +41,46 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                             <S.EventCardElement>{event.homeTeam.name}</S.EventCardElement>
 
                             <S.EventCardElement>
-                            <S.TeamImage
-                                loader={myLoader}
-                                id={event.awayTeam.id.toString()}
-                                alt="Picture of the author"
-                                src={event.awayTeam.id.toString()} 
-                                width={120}
-                                height={120}
+                                <S.TeamImage
+                                    loader={myLoader}
+                                    id={event.awayTeam.id.toString()}
+                                    alt="Picture of the author"
+                                    src={event.awayTeam.id.toString()}
+                                    width={120}
+                                    height={120}
                                 />
                             </S.EventCardElement>
                             <S.EventCardElement>
-                            <S.TeamImage
-                                loader={myLoader}
-                                id={event.homeTeam.id.toString()}
-                                alt="Picture of the author"
-                                src={event.homeTeam.id.toString()} 
-                                width={120}
-                                height={120}
+                                <S.TeamImage
+                                    loader={myLoader}
+                                    id={event.homeTeam.id.toString()}
+                                    alt="Picture of the author"
+                                    src={event.homeTeam.id.toString()}
+                                    width={120}
+                                    height={120}
                                 />
                             </S.EventCardElement>
-                            <S.EventCardElement>{(event.awayTeam.id)}</S.EventCardElement>
-                            <S.EventCardElement>{event.homeTeam.id}</S.EventCardElement>
+                            {event.winnerCode != 3 ?
+
+                                <>
+                                    {event.winnerCode == 1 ?
+                                        <>
+                                            <S.EventCardElement>WINNER</S.EventCardElement>
+                                            <S.EventCardElement>LOSER</S.EventCardElement>
+                                        </>
+                                        :
+                                        <>
+                                            <S.EventCardElement>LOSER</S.EventCardElement>
+                                            <S.EventCardElement>WINNER</S.EventCardElement>
+                                        </>
+                                    }
+
+                                </>
+                                :
+                                <></>
+
+                            }
+
 
                             <S.EventCardElement>Date:</S.EventCardElement>
                             <S.EventCardElement>{getDate(event.startTimestamp)}</S.EventCardElement>
