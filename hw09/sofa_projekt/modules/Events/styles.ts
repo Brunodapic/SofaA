@@ -37,4 +37,10 @@ export const TeamImage = styled(Image)`
   flex: 0 0 50%;
   padding: 10px;
   text-align: center;
+  cursor: pointer;
+`
+
+export const EventLinkTo = styled.h5`
+  flex: 0 0 100%;
+  text-align: center;
 `

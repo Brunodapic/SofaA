@@ -8,8 +8,11 @@ interface P {
 
 export default function CategoryLink({category}: React.PropsWithChildren<P>) {
   return (
-    <Link href={{
-      pathname: '/events/'+category.name+'/'+category.id
-    }}>{category.name}</Link>
+    <Link 
+      href={{pathname: '/events/'+category.name+'/'+category.id}}
+      style={{cursor:'pointer'}}
+      >
+        <h1>{category.name}</h1>
+    </Link>
   )
 }

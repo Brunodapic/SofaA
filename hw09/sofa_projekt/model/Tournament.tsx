@@ -6,6 +6,8 @@ export interface Tournament {
   }
   
   export interface UniqueTournament {
+    titleHolder: any
+    category: any
     id: number
     slug: string
     name: string

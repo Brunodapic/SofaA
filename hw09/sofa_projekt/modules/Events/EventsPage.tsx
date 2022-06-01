@@ -2,11 +2,9 @@ import { useRouter } from 'next/router'
 import { Button } from '../../components/Button'
 import { BasicEvent } from '../../model/Event'
 import * as S from './styles'
-import CategoryLink from '../Link/CategoryLink'
-import { getTeamImage } from '../../util/fetch'
-import Image from 'next/image'
 import { api } from '../../util/fetch'
-import useSWR from 'swr'
+import UniqueTournamentLink from '../Link/UniqueTournamentLink'
+
 
 export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
@@ -35,13 +33,22 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                     return (
 
                         <S.EventCard key={event.customId + event.id}>
-                            <S.EventName>{event.tournament.name}</S.EventName>
+                            {event.tournament.uniqueTournament ?
+
+                                <S.EventLinkTo><UniqueTournamentLink uniqueTournament={event.tournament.uniqueTournament} /></S.EventLinkTo>
+
+
+                                :
+                                <S.EventName>{event.id}</S.EventName>
+
+                            }
 
                             <S.EventCardElement>{event.awayTeam.name}</S.EventCardElement>
                             <S.EventCardElement>{event.homeTeam.name}</S.EventCardElement>
 
                             <S.EventCardElement>
                                 <S.TeamImage
+                                    onClick={() => router.push(`/team/${event.awayTeam.slug}/${event.awayTeam.id}/`)}
                                     loader={myLoader}
                                     id={event.awayTeam.id.toString()}
                                     alt="Picture of the author"
@@ -52,6 +59,7 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                             </S.EventCardElement>
                             <S.EventCardElement>
                                 <S.TeamImage
+                                    onClick={() => router.push(`/team/${event.homeTeam.slug}/${event.homeTeam.id}/`)}
                                     loader={myLoader}
                                     id={event.homeTeam.id.toString()}
                                     alt="Picture of the author"
@@ -60,7 +68,15 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                                     height={120}
                                 />
                             </S.EventCardElement>
-                            {event.winnerCode != 3 ?
+                            {event.winnerCode == 3 ?
+
+                                <>
+
+                                    <S.EventName>DRAW</S.EventName>
+
+                                </>
+
+                                :
 
                                 <>
                                     {event.winnerCode == 1 ?
@@ -76,9 +92,6 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                                     }
 
                                 </>
-                                :
-                                <></>
-
                             }
 
 

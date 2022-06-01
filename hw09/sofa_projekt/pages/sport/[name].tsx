@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const current = new Date();
     const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
+    //Category List
     const details = await fetcher(`${api}/sport/${name}/2021-05-07/7200/categories`)
    
 

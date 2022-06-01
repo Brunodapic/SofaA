@@ -26,7 +26,7 @@ export default function SportCategoriesPage({categories}:{categories:Array<Sport
         return (
   
         <S.SportsCategoryCard key={element.category.id+element.category.name}> 
-          <Category category={element.category}/>
+          <Category  category={element.category}/>
           <h1>{element.totalEvents}</h1>
           <h1>{element.totalVideos}</h1>
           <h1>{element.totalEventPlayerStatistics}</h1>
@@ -41,8 +41,8 @@ export default function SportCategoriesPage({categories}:{categories:Array<Sport
               id={ID.toString()}
               alt="Picture of the author"
               src={ID.toString()}
-              width={80}
-              height={80}
+              width={60}
+              height={60}
           />
 
             )//<GeuniqueTournamentIDname uniqueTournamentID={ID}/>

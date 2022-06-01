@@ -5,6 +5,7 @@ import {fetcher,api} from '../../util/fetch'
 import { Sport } from '../../model/Sport'
 import SportCategoriesPage from '../../modules/SportCategories/SportCategoriesPage'
 import EventsPage from '../../modules/Events/EventsPage'
+import UniqueTournamentPage from '../../modules/UniqueTournament/UniqueTournamentPage'
 
 interface UniqueTournamentProps{
     uniqueTournament:UniqueTournament
@@ -15,7 +16,7 @@ export default function CategoryPage(props: UniqueTournamentProps) {
     console.log(props)
     return (
 
-        <></>
+        <UniqueTournamentPage UniqueTournament={props.uniqueTournament}  />
 
     )
 }

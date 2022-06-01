@@ -12,5 +12,4 @@ export const SportsCategoryCard = styled.div`
   height: 400px;
   border: 1px black solid;
   margin: 5px;
-  padding-left: 1rem;
 `
