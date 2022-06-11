@@ -26,7 +26,7 @@ export default function SportCategoriesPage({categories}:{categories:Array<Sport
         return (
   
         <S.SportsCategoryCard key={element.category.id+element.category.name}> 
-          <Category  category={element.category}/>
+          <div style={ {    cursor: 'pointer',}}><Category category={element.category}/></div>
           <h1>{element.totalEvents}</h1>
           <h1>{element.totalVideos}</h1>
           <h1>{element.totalEventPlayerStatistics}</h1>

@@ -19,7 +19,6 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
 
 
-
     const router = useRouter()
     console.log(events)
     ///team/{teamID}/image
@@ -32,7 +31,7 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                 {events.map(event => {
                     return (
 
-                        <S.EventCard key={event.customId + event.id}>
+                        <S.EventCard key={event.customId + event.id}  >
                             {event.tournament.uniqueTournament ?
 
                                 <S.EventLinkTo><UniqueTournamentLink uniqueTournament={event.tournament.uniqueTournament} /></S.EventLinkTo>
@@ -68,30 +67,31 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                                     height={120}
                                 />
                             </S.EventCardElement>
-                            {event.winnerCode == 3 ?
+                            {event.winnerCode == 3 || event.winnerCode == 0 ?
 
                                 <>
-
+                                    {event.winnerCode == 3 ?
                                     <S.EventName>DRAW</S.EventName>
-
+                                    :
+                                    <S.EventName>NOT YET PLAYED</S.EventName>
+                                    }
                                 </>
-
                                 :
-
                                 <>
                                     {event.winnerCode == 1 ?
                                         <>
-                                            <S.EventCardElement>WINNER</S.EventCardElement>
                                             <S.EventCardElement>LOSER</S.EventCardElement>
+                                            <S.EventCardElement>WINNER</S.EventCardElement>
                                         </>
                                         :
                                         <>
-                                            <S.EventCardElement>LOSER</S.EventCardElement>
                                             <S.EventCardElement>WINNER</S.EventCardElement>
+                                            <S.EventCardElement>LOSER</S.EventCardElement>
+
                                         </>
                                     }
-
                                 </>
+                            
                             }
 
 
@@ -100,7 +100,7 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
                             <S.EventCardElement>{event.awayScore.display}</S.EventCardElement>
                             <S.EventCardElement>{event.homeScore.display}</S.EventCardElement>
-
+                            <S.MoreInfo onClick={() => router.push(`/event/${event.id}`)}>MORE INFO</S.MoreInfo>
                         </S.EventCard>
 
                     )

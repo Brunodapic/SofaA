@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next'
 import React from 'react'
-import { SportCategories } from '../../model/Categories'
-import PlayerDetails from '../../modules/Player/PlayerDetails'
-import {fetcher,api} from '../../util/fetch'
-import { Sport } from '../../model/Sport'
-import SportCategoriesPage from '../../modules/SportCategories/SportCategoriesPage'
+import { SportCategories } from '../../../model/Categories'
+import PlayerDetails from '../../../modules/Player/PlayerDetails'
+import {fetcher,api} from '../../../util/fetch'
+import { Sport } from '../../../model/Sport'
+import SportCategoriesPage from '../../../modules/SportCategories/SportCategoriesPage'
 
 interface SportCategoriesProps{
     categories:Array<SportCategories>

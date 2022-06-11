@@ -7,7 +7,7 @@ import CategoryLink from '../Link/CategoryLink'
 export default function CategoryDetails({category}: {category: Category}) {
   return (
     <>
-      <CategoryLink key={category.id} category={category}></CategoryLink>
+      <CategoryLink  key={category.id} category={category}></CategoryLink>
     </>
   )
 }

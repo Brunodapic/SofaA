@@ -6,6 +6,7 @@ export const navigationBar = styled.div`
     border: 2px solid white;
     padding: 30px;
     background-color: #0a30a6;
+    height: 100px;
     
     button {
         background-color: #0a6bff;
@@ -17,12 +18,12 @@ export const navigationBar = styled.div`
         cursor: pointer;
         display: inherit;
         font-family: "Space Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 18px;
+        font-size: 15px;
+        font-weight: 350;
+        line-height: 15px;
         margin: 0;
-        min-height: 28px;
-        min-width: 120px;
+        max-height: 40px;
+        min-width: 80px;
         padding: 10px 10px;
         position: relative;
         text-align: center;

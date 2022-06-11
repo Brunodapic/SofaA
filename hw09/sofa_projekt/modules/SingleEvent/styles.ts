@@ -9,8 +9,8 @@ export const EventsMainDiv = styled.div`
 `
 
 export const EventCard = styled.div`
-  width: 400px;
-  height: 500px;
+  width: 800px;
+  height: 1000px;
   border: 1px black solid;
   margin: 5px;
   display: flex;
