@@ -23,7 +23,7 @@ export default function SportEventPage(props: SportEventsProps) {
     const onChangeDate = (e: { target: { value: string | number | Date } }) => {
         const newDate=new Date(e.target.value).toISOString().slice(0, 10)
         setDate(newDate);
-        console.log(newDate); //value picked from date picker
+        //console.log(newDate); //value picked from date picker
     };
     const { data, error } = useSWR<SportEventsProps>(`${api}/sport/${props.name}/scheduled-events/${date}`,{
         revalidateIfStale: false,
@@ -33,9 +33,9 @@ export default function SportEventPage(props: SportEventsProps) {
       })
 
     if(data && !error){
-        console.log(`${api}/sport/${props.name}/scheduled-events/${date}`)
+        //console.log(`${api}/sport/${props.name}/scheduled-events/${date}`)
         console.log("USESWR:")
-        console.log(data)
+        //console.log(data)
 
         return (
             <>
@@ -52,7 +52,7 @@ export default function SportEventPage(props: SportEventsProps) {
                         />
                 </div>
                 <div>
-                <Button onClick={() => router.push('/sport/'+props.name+'/events')}>View all events</Button>
+                <Button onClick={() => router.push('/sport/'+props.name+'/categories')}>View categories</Button>
                 </div>
                 <EventsPage events={data.events} />
     

@@ -4,9 +4,20 @@ import { BasicEvent } from '../../model/Event'
 import * as S from './styles'
 import { api } from '../../util/fetch'
 import UniqueTournamentLink from '../Link/UniqueTournamentLink'
-
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useNotification } from '../../context/NotificationContext'
 
 export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
+
+    const [ring, setRing] = useState(false)
+    const { notification , setNotification} = useNotification()
+
+    useEffect(() => {
+        // window is accessible here.
+        console.log('update')
+      }, [notification]);
+    console.log(notification)
 
     const myLoader = (id: any) => {
         return `${api}/team/${id.src}/image`
@@ -17,6 +28,23 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
         return (t.toLocaleDateString('en-GB'));
     }
 
+    const addToNotification=(id:number)=>{
+
+        //redundanto ali zasto ne
+        if(notification?.includes(id)){
+            console.log("id in notification")
+        }
+        else{
+        setNotification((ids: any) => [
+            ...ids,
+            id
+        ])
+        }
+    }
+    const handleRemoveItem = (id:any) => {
+        
+        setNotification(notification?.filter(item => item !== id));
+       };
 
 
     const router = useRouter()
@@ -71,9 +99,9 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
                                 <>
                                     {event.winnerCode == 3 ?
-                                    <S.EventName>DRAW</S.EventName>
-                                    :
-                                    <S.EventName>NOT YET PLAYED</S.EventName>
+                                        <S.EventName>DRAW</S.EventName>
+                                        :
+                                        <S.EventName>NOT YET PLAYED</S.EventName>
                                     }
                                 </>
                                 :
@@ -91,7 +119,7 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                                         </>
                                     }
                                 </>
-                            
+
                             }
 
 
@@ -100,6 +128,25 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
                             <S.EventCardElement>{event.awayScore.display}</S.EventCardElement>
                             <S.EventCardElement>{event.homeScore.display}</S.EventCardElement>
+                            {notification?.includes(event.id)?
+                                <div>
+                                <Image
+                                    src={'/static/images/ring.png'}
+                                    width={20}
+                                    height={20}
+                                    onClick={()=>handleRemoveItem(event.id)}
+                                    />
+                            </div>
+                            :
+                            <div>
+                                <Image
+                                    src={'/static/images/bell.png'}
+                                    width={20}
+                                    height={20}
+                                    onClick={()=>addToNotification(event.id)}
+                                    />
+                            </div>
+                            }
                             <S.MoreInfo onClick={() => router.push(`/event/${event.id}`)}>MORE INFO</S.MoreInfo>
                         </S.EventCard>
 

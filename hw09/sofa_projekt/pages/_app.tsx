@@ -7,6 +7,7 @@ import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import NavBar from '../modules/Navbar/Navbar';
 import { DarkModeContext } from '../context/DarkModeContext';
+import { NotificationContext } from '../context/NotificationContext';
 import { MyComp } from './api/useWindowDimensions';
 
 
@@ -26,16 +27,28 @@ type AppPropsWithLayout = AppProps & {
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const [darkMode, setDarkMode] = useState<boolean>(false)
-  const comp = MyComp()
+  const [notification, setNotification] = useState([])
+  var comp = undefined
+  useEffect(() => {
+    // window is accessible here.
+    comp = window.innerWidth
+    console.log("window.innerWidth", window.innerWidth);
+  }, []);
   console.log(comp)
 
+
+
+
+
+
   const getLayout = Component.getLayout ?? ((page) => page)
-  
   return getLayout(
     <SWRConfig value={swrConfig}>
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-        <NavBar />
-        <Component {...pageProps} />
+        <NotificationContext.Provider value={{ notification, setNotification }}>
+          <NavBar />
+          <Component {...pageProps} />
+        </NotificationContext.Provider>
       </DarkModeContext.Provider>
     </SWRConfig>
   )

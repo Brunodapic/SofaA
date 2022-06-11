@@ -2,18 +2,28 @@ import { GetServerSideProps } from 'next'
 import React from 'react'
 import { SportCategories } from '../../../model/Categories'
 import PlayerDetails from '../../../modules/Player/PlayerDetails'
-import {fetcher,api} from '../../../util/fetch'
+import { fetcher, api } from '../../../util/fetch'
 import { Sport } from '../../../model/Sport'
 import SportCategoriesPage from '../../../modules/SportCategories/SportCategoriesPage'
+import { Button } from '../../../components/Button'
+import router from 'next/router'
 
-interface SportCategoriesProps{
-    categories:Array<SportCategories>
+interface SportCategoriesProps {
+  categories: Array<SportCategories>
+  name: string
 }
 
 
 export default function SportsPage(props: SportCategoriesProps) {
-    console.log(props)
-    return (<SportCategoriesPage categories={props.categories}/>)
+  console.log(props)
+  return (
+    <>
+      <div>
+        <Button onClick={() => router.push('/sport/' + props.name + '/events')}>View all events</Button>
+      </div>
+      <SportCategoriesPage categories={props.categories} />
+
+    </>)
 }
 
 // This value is considered fresh for ten seconds (s-maxage=10).
@@ -31,13 +41,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //@ts-ignore
     const { name } = params;
     const current = new Date();
-    const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+    const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
 
     //Category List
     const details = await fetcher(`${api}/sport/${name}/2021-05-07/7200/categories`)
-   
 
-    const props:SportCategoriesProps ={categories:details.categories}
+
+    const props: SportCategoriesProps = { categories: details.categories , name:name}
 
     return {
       props: props,

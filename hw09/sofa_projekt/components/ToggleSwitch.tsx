@@ -48,7 +48,7 @@ const Input = styled.input`
 export default function ToggleSwitch() {
 
     const {darkMode,setDarkMode}=useDarkMode()
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(true);
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setChecked(e.target.checked);
         setDarkMode(!darkMode)

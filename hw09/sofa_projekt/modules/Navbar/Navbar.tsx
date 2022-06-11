@@ -5,30 +5,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ToggleSwitch from '../../components/ToggleSwitch';
+import { useDarkMode } from '../../context/DarkModeContext';
 
 export default function NavBar() {
 
     const sports = ['football', 'basketball', 'tennis', 'esports', 'handball', 'volleyball', 'baseball', 'motorsport', 'rugby', 'darts', 'cricket', 'snooker', 'futsal']
     const router = useRouter()
-
-    const useDeviceDetect = () => {
-        const [width, setWidth] = useState(window.innerWidth);
-        const handleWindowResize = () => {
-            setWidth(window.innerWidth);
-        }
+    const { darkMode } = useDarkMode()
+    console.log("dark mode ", darkMode)
     
-        useEffect(() => {
-            window.addEventListener('resize', handleWindowResize);
-            return () => {
-                window.removeEventListener('resize', handleWindowResize);
-            }
-        }, []);
-    
-        return (width <= 768);
-    }
     return (
-        <S.navigationBar>
-
+        <S.navigationBar darkMode={darkMode}>
+            
+            <div>
             {false?
             <>
             {sports.map(sport => {
@@ -42,14 +31,15 @@ export default function NavBar() {
             })}
             </> 
             }
+            </div>
 
             <div>
                 <ToggleSwitch/>
             </div>
             
-            <S.usernameDisplayDiv >
+            <div>
                 <h3>User</h3>
-            </S.usernameDisplayDiv>
+            </div>
 
 
         </S.navigationBar    >
