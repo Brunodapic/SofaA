@@ -41,6 +41,7 @@ export default function SportCategoriesPage({categories}:{categories:Array<Sport
               id={ID.toString()}
               alt="Picture of the author"
               src={ID.toString()}
+              key={ID.toString()}
               width={60}
               height={60}
           />

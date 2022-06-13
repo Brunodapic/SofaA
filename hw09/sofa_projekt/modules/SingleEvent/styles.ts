@@ -9,8 +9,10 @@ export const EventsMainDiv = styled.div`
 `
 
 export const EventCard = styled.div`
-  width: 800px;
-  height: 1000px;
+  min-width: 400px;
+  max-width: 800px;
+  width: auto;
+  height: auto;
   border: 1px black solid;
   margin: 5px;
   display: flex;
@@ -28,7 +30,6 @@ export const EventCardElement = styled.div`
 
 export const EventName = styled.h2`
   flex: 0 0 100%;
-  padding: 10px;
   text-align: center;
 `
 
@@ -53,4 +54,29 @@ export const MoreInfo = styled.div`
   text-align: center;
   cursor: pointer;
   background-color: lightblue;
+`
+
+export const DataDiv = styled.div`
+  padding: 5px;
+  justify-content: space-evenly;
+  width: 800px;
+`
+export const DataDivElement = styled.div`
+  display: inline;
+  h3{
+    border-top: black solid 1px;
+    padding: 5px;
+    padding-top: 15px;
+  }
+`
+export const GroupDiv = styled.div`
+  display: inline;
+  justify-content: space-evenly;
+
+`
+
+export const GroupDivElement = styled.div`
+  display: flex;
+  justify-content: space-around;
+  border-radius: 5px;
 `

@@ -26,10 +26,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //@ts-ignore
     const { slug, id } = params;
     const details = await fetcher(`https://api.sofascore.com/api/v1/player/${id}`)
-    console.log("details::",details)
-    console.log(".player::",details.player)
+
     const props: PlayerPageProps = {player: details.player}
-    console.log(props)
+
     return {
       props: props,
     };

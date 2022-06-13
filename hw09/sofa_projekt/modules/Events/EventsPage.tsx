@@ -7,17 +7,19 @@ import UniqueTournamentLink from '../Link/UniqueTournamentLink'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useNotification } from '../../context/NotificationContext'
+import { BellIcon } from '../../components/Bell'
+import { useDarkMode } from '../../context/DarkModeContext'
+
 
 export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
-    const [ring, setRing] = useState(false)
     const { notification , setNotification} = useNotification()
+    const { darkMode } = useDarkMode()
 
     useEffect(() => {
         // window is accessible here.
         console.log('update')
       }, [notification]);
-    console.log(notification)
 
     const myLoader = (id: any) => {
         return `${api}/team/${id.src}/image`
@@ -32,7 +34,6 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
         //redundanto ali zasto ne
         if(notification?.includes(id)){
-            console.log("id in notification")
         }
         else{
         setNotification((ids: any) => [
@@ -48,7 +49,6 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
 
     const router = useRouter()
-    console.log(events)
     ///team/{teamID}/image
     return (
         <>
@@ -130,8 +130,8 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                             <S.EventCardElement>{event.homeScore.display}</S.EventCardElement>
                             {notification?.includes(event.id)?
                                 <div>
-                                <Image
-                                    src={'/static/images/ring.png'}
+                                <BellIcon
+                                    src={!darkMode?'/static/images/ring_dark.png':'/static/images/ring.png'}
                                     width={20}
                                     height={20}
                                     onClick={()=>handleRemoveItem(event.id)}
@@ -139,8 +139,8 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
                             </div>
                             :
                             <div>
-                                <Image
-                                    src={'/static/images/bell.png'}
+                                <BellIcon
+                                    src={!darkMode?'/static/images/dark_bell.png':'/static/images/bell.png'}
                                     width={20}
                                     height={20}
                                     onClick={()=>addToNotification(event.id)}

@@ -54,3 +54,4 @@ export const MoreInfo = styled.div`
   cursor: pointer;
   background-color: lightblue;
 `
+

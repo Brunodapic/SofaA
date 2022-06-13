@@ -10,7 +10,7 @@ export interface NotificationContext {
 
 //export default SetingsContext as unknown as React.Context<SetingsContext>
 export const NotificationContext = createContext<NotificationContext>
-    ({  notification: [],
+    ({  notification: [10023420],
         setNotification:(id:any)=>{console.log(id)}
 });
 export const useNotification = () => useContext(NotificationContext);

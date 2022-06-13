@@ -34,7 +34,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     comp = window.innerWidth
     console.log("window.innerWidth", window.innerWidth);
   }, []);
-  console.log(comp)
 
 
 

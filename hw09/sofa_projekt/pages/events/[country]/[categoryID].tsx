@@ -15,13 +15,11 @@ interface CategoriesProps {
 
 
 export default function CategoryPage(props: CategoriesProps) {
-  console.log(props)
 
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
   const onChangeDate = (e: { target: { value: string | number | Date } }) => {
     const newDate = new Date(e.target.value).toISOString().slice(0, 10)
     setDate(newDate);
-    console.log(newDate); //value picked from date picker
   };
   const { data, error } = useSWR<CategoriesProps>(`${api}/category/${props.categoryID}/scheduled-events/${date}`, {
     revalidateIfStale: false,
@@ -31,8 +29,6 @@ export default function CategoryPage(props: CategoriesProps) {
   })
 
   if (data && !error) {
-    console.log("USESWR:")
-    console.log(data)
 
     return (
       <>
@@ -92,15 +88,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const current = new Date();
     var date = new Date().toISOString().slice(0, 10);
 
-    console.log(`${api}/category/${categoryID}/scheduled-events/2021-05-07`)
     const details = await fetcher(`${api}/category/${categoryID}/scheduled-events/${date}`)
     https://api.sofascore.com/api/v1/category/8/scheduled-events/2022-05-28
 
-    console.log(details.events)
 
     const props: CategoriesProps = { events: details.events, categoryID: categoryID }
 
-    console.log(props)
 
     return {
       props: props,

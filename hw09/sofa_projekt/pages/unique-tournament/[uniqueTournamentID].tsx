@@ -13,7 +13,6 @@ interface UniqueTournamentProps{
 
 
 export default function CategoryPage(props: UniqueTournamentProps) {
-    console.log(props)
     return (
 
         <UniqueTournamentPage UniqueTournament={props.uniqueTournament}  />
@@ -35,15 +34,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     //@ts-ignore
     const { uniqueTournamentID } = params;
-
-    console.log(`${api}/unique-tournament/${uniqueTournamentID}`)
     const details = await fetcher(`${api}/unique-tournament/${uniqueTournamentID}`)
-
-    console.log(details.uniqueTournament)
-
     const props:UniqueTournamentProps ={uniqueTournament:details.uniqueTournament}
-
-    console.log(props)
 
     return {
       props: props,

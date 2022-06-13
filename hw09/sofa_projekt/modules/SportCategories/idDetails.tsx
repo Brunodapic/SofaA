@@ -13,13 +13,11 @@ export default function GeuniqueTournamentIDname({ uniqueTournamentID }: { uniqu
     const { data, error } = useSWR<EventsResponse>(`${api}/unique-tournament/${uniqueTournamentID}`)
 
 
-    console.log(data)
     if (error) {
         return null
     }
     if (!data) {
         return <div>Loading</div>
     }
-    console.log(data.uniqueTournament.name)
     return (<div>{data.uniqueTournament.name}</div>)
 }

@@ -9,10 +9,9 @@ import { useDarkMode } from '../../context/DarkModeContext';
 
 export default function NavBar() {
 
-    const sports = ['football', 'basketball', 'tennis', 'esports', 'handball', 'volleyball', 'baseball', 'motorsport', 'rugby', 'darts', 'cricket', 'snooker', 'futsal']
+    const sports = ['football', 'basketball', 'tennis', 'esports', 'handball', 'volleyball', 'baseball', 'motorsport', 'rugby', 'darts', 'cricket', 'futsal']
     const router = useRouter()
     const { darkMode } = useDarkMode()
-    console.log("dark mode ", darkMode)
     
     return (
         <S.navigationBar darkMode={darkMode}>
@@ -38,7 +37,7 @@ export default function NavBar() {
             </div>
             
             <div>
-                <h3>User</h3>
+                <S.usernameDisplayDiv onClick={() => router.push(`/profil`)} >User </S.usernameDisplayDiv>
             </div>
 
 

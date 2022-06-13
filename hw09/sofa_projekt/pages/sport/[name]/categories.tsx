@@ -15,7 +15,6 @@ interface SportCategoriesProps {
 
 
 export default function SportsPage(props: SportCategoriesProps) {
-  console.log(props)
   return (
     <>
       <div>

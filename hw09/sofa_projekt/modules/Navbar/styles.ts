@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const navigationBar = styled.div<{darkMode?: boolean}>`
+    @media only screen and (max-width: 600px) {
+    height: 300px;
+    }   
     display: flex;
     justify-content: space-evenly;
     border: 2px solid white;
@@ -47,13 +50,7 @@ export const navigationBar = styled.div<{darkMode?: boolean}>`
     }
 `
 
-export const usernameDisplayDiv = styled.div` 
-    margin-left: auto;
-    display: flex;
-    justify-content: center;
-    border: 1px solid;
-    padding: 1rem;
-    right: 2rem;
-    color: white;
+export const usernameDisplayDiv = styled.h3` 
     cursor: pointer;
+    text-align: center;
 `
