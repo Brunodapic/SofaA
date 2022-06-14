@@ -13,13 +13,13 @@ import { useDarkMode } from '../../context/DarkModeContext'
 
 export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
-    const { notification , setNotification} = useNotification()
+    const { notification, setNotification } = useNotification()
     const { darkMode } = useDarkMode()
 
-    useEffect(() => {
+    /*useEffect(() => {
         // window is accessible here.
         console.log('update')
-      }, [notification]);
+    }, [notification]);*/
 
     const myLoader = (id: any) => {
         return `${api}/team/${id.src}/image`
@@ -30,26 +30,38 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
         return (t.toLocaleDateString('en-GB'));
     }
 
-    const addToNotification=(id:number)=>{
+    const addToNotification = (id: number) => {
 
         //redundanto ali zasto ne
-        if(notification?.includes(id)){
+        if (notification?.includes(id)) {
+            console.log("allredy in")
         }
-        else{
-        setNotification((ids: any) => [
-            ...ids,
-            id
-        ])
+        else {
+            setNotification((ids: any) => [
+                ...ids,
+                id
+            ])
         }
     }
-    const handleRemoveItem = (id:any) => {
-        
-        setNotification(notification?.filter(item => item !== id));
-       };
+    const handleRemoveItem = (id: any) => {
 
+        setNotification(notification?.filter(item => item !== id));
+    };
+
+    function removeItem<T>(arr: Array<T>, value: T): Array<T> {
+        const index = arr.indexOf(value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+        return arr;
+    }
 
     const router = useRouter()
-    ///team/{teamID}/image
+
+    //console.log(stored)
+
+
+
     return (
         <>
             <Button onClick={() => router.push('/')}>INDEX</Button>
@@ -128,24 +140,24 @@ export default function EventsPage({ events }: { events: Array<BasicEvent> }) {
 
                             <S.EventCardElement>{event.awayScore.display}</S.EventCardElement>
                             <S.EventCardElement>{event.homeScore.display}</S.EventCardElement>
-                            {notification?.includes(event.id)?
+                            {notification?.includes(event.id) ?
                                 <div>
-                                <BellIcon
-                                    src={!darkMode?'/static/images/ring_dark.png':'/static/images/ring.png'}
-                                    width={20}
-                                    height={20}
-                                    onClick={()=>handleRemoveItem(event.id)}
+                                    <BellIcon
+                                        src={!darkMode ? '/static/images/ring_dark.png' : '/static/images/ring.png'}
+                                        width={20}
+                                        height={20}
+                                        onClick={() => handleRemoveItem(event.id)}
                                     />
-                            </div>
-                            :
-                            <div>
-                                <BellIcon
-                                    src={!darkMode?'/static/images/dark_bell.png':'/static/images/bell.png'}
-                                    width={20}
-                                    height={20}
-                                    onClick={()=>addToNotification(event.id)}
+                                </div>
+                                :
+                                <div>
+                                    <BellIcon
+                                        src={!darkMode ? '/static/images/dark_bell.png' : '/static/images/bell.png'}
+                                        width={20}
+                                        height={20}
+                                        onClick={() => addToNotification(event.id)}
                                     />
-                            </div>
+                                </div>
                             }
                             <S.MoreInfo onClick={() => router.push(`/event/${event.id}`)}>MORE INFO</S.MoreInfo>
                         </S.EventCard>

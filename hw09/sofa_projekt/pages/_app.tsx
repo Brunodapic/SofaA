@@ -27,14 +27,29 @@ type AppPropsWithLayout = AppProps & {
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const [darkMode, setDarkMode] = useState<boolean>(false)
-  const [notification, setNotification] = useState([])
-  var comp = undefined
-  useEffect(() => {
+  const [notification, setNotification] = useState<number[]>([10023350])
+  /*useEffect(() => {
     // window is accessible here.
     comp = window.innerWidth
     console.log("window.innerWidth", window.innerWidth);
+  }, []);*/
+
+  //hvala Alen
+
+  useEffect(() => {
+    setNotification(JSON.parse(window.localStorage.getItem('notification')!));
   }, []);
 
+  useEffect(() => {
+    window.localStorage.setItem('notification', JSON.stringify(notification));
+  }, [notification]);
+
+  const increaseCount = (id:number) => {
+    return setNotification([...notification, id]);
+  }
+  const decreaseCount = (id:number) => {
+    return setNotification(notification.filter(item => item !== id))
+  }
 
 
 
@@ -46,7 +61,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
         <NotificationContext.Provider value={{ notification, setNotification }}>
           <NavBar />
-          <Component {...pageProps} />
+          <Component {...pageProps}/>
         </NotificationContext.Provider>
       </DarkModeContext.Provider>
     </SWRConfig>

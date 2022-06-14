@@ -31,6 +31,8 @@ export default function SportEventPage(props: SportEventsProps) {
         revalidateOnMount: false
       })
 
+
+
     if(data && !error){
 
 

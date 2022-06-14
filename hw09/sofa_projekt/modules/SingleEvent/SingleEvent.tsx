@@ -26,10 +26,6 @@ export default function SingleEventsPage({ event }: { event: BasicEvent }) {
         var t = new Date(timestamp * 1000);
         return (t.toLocaleDateString('en-GB'));
     }
-
-
-
-
     const router = useRouter()
 
     ///team/{teamID}/image
@@ -146,12 +142,3 @@ export default function SingleEventsPage({ event }: { event: BasicEvent }) {
 
     )
 }
-
-/*.map((group: any)=>{
-                            
-                            return(
-                                <h2>
-                                 yes   
-                                </h2>
-                            )
-                        }) */

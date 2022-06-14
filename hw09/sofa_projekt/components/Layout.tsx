@@ -6,7 +6,6 @@ export default function Layout({ children }:any) {
 
   //if (error) return <div>Failed to load</div>
   //if (!data) return <div>Loading...</div>
-
   return (
     <>
       <main>{children}</main>

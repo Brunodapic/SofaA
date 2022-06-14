@@ -10,6 +10,7 @@ interface EventProps{
 
 
 export default function CategoryPage(props: EventProps) {
+    console.log(props)
     return (
 
         <SingleEvent event={props.event}/>
@@ -34,10 +35,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const current = new Date();
     const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
+    console.log(`${api}/event/${eventID}`)
     const details = await fetcher(`${api}/event/${eventID}`)
     https://api.sofascore.com/api/v1/category/8/scheduled-events/2022-05-28
 
+    console.log(details.events)
+
     const props:EventProps ={event:details.event}
+
+    console.log(props)
 
     return {
       props: props,
